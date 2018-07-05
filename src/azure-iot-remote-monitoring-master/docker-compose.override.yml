@@ -1,0 +1,12 @@
+version: '3.4'
+
+networks:
+  default:
+    external:
+      name: mynat
+#      name: nat
+
+services:
+  web:
+    ports:
+      - "80"
