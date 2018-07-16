@@ -216,6 +216,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -232,6 +233,10 @@
       <HintPath>..\..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -263,6 +268,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Validation">
       <HintPath>..\..\packages\Validation.2.2.8\lib\dotnet\Validation.dll</HintPath>
       <Private>True</Private>
@@ -272,15 +278,85 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Strings.cs.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.cs.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.de.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Strings.es.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.fr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.hu.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.hu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.it.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.it.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Strings.ja.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.ja.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.ko.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.ko.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.nl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.nl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.pl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.pt-BR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.pt-PT.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.pt-PT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.ru.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.sv.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.sv.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Strings.tr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.tr.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Strings.zh-HANS.designer.cs">
       <AutoGen>True</AutoGen>
@@ -458,10 +534,6 @@
     <Content Include="Content\styles\bootstrap\mixins\text-emphasis.less" />
     <Content Include="Content\styles\bootstrap\mixins\text-overflow.less" />
     <Content Include="Content\styles\bootstrap\mixins\vendor-prefixes.less" />
-    <None Include="Dockerfile" />
-    <None Include=".dockerignore">
-      <DependentUpon>Dockerfile</DependentUpon>
-    </None>
     <None Include="Properties\PublishProfiles\acrtsti.pubxml">
       <SubType>Designer</SubType>
     </None>
@@ -783,10 +855,10 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>30454</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44305</IISUrl>
+          <IISUrl>http://localhost:30454/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://tsti-iov.azurewebsites.net</CustomServerUrl>
+          <CustomServerUrl>http://iov.tsti.local</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

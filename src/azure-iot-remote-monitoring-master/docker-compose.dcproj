@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Windows</DockerTargetOS>
-    <ProjectGuid>bb4081de-028b-4771-8e8d-7e55d092ecf4</ProjectGuid>
+    <ProjectGuid>be10d402-1526-4a9a-9682-536c1d865339</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>http://{ServiceIPAddress}</DockerServiceUrl>
     <DockerServiceName>web</DockerServiceName>

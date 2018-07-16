@@ -253,9 +253,8 @@
     <EmbeddedResource Include="Strings.zh-HANS.resx" />
     <EmbeddedResource Include="Strings.zh-HANT.resx" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\Common\Common.csproj">
+    <ProjectReference Include="..\..\Common\Common.csproj">
       <Project>{5959c109-5369-4ff7-8b55-605a79fdf200}</Project>
       <Name>Common</Name>
     </ProjectReference>

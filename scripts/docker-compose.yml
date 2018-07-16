@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  IoVGateway:
+    image: tsti/iovgw:latest
+    build:
+      context: .
+      dockerfile: ..\src\InternetOfVehicles\InternetOfVehicles\App.Dockerfile
+    volumes:
+      - C:\temp:C:\app\Logs
+    ports:
+      - 8888
+  IoVGatewayBuilder:
+    image: tsti/iovgwbuilder:latest
+    build:
+      context: .
+      dockerfile: ..\src\InternetOfVehicles\InternetOfVehicles\Builder.Dockerfile
+  IoVWeb:
+    image: tsti/iovweb:latest
+    hostname: iov.tsti.local
+    build:
+      context: .
+      dockerfile: ..\src\azure-iot-remote-monitoring-master\DeviceAdministration\Web\Web.Dockerfile
+    ports:
+      - 80
+      - 443
+    environment:
+      - ida.AADClientId
+      - ida.AADInstance
+      - ida.AADTenant
+      - iotHub.HostName
+      - iotHub.ConnectionString
+      - docdb.EndpointUrl
+      - docdb.PrimaryAuthorizationKey
+      - eventHub.ConnectionString
+      - eventHub.StorageConnectionString
+      - RulesEventHub.Name
+      - RulesEventHub.ConnectionString
+      - device.StorageConnectionString
+      - device.TableName
+      - ObjectTypePrefix
+      - SolutionName
+      - MapApiQueryKey
+      - AzureAccountName
+      - WEBSITE_HOSTNAME
+      
+  IoVWebBuilder:
+    image: tsti/iovwebbuilder:latest
+    build:
+      context: .
+      dockerfile: ..\src\azure-iot-remote-monitoring-master\DeviceAdministration\Web\Builder.Dockerfile
+      
+networks:
+  default:
+    external:
+      name: nat

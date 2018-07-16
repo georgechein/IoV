@@ -19,34 +19,35 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.Common.Configura
 
         public string GetConfigurationSettingValueOrDefault(string configurationSettingName, string defaultValue)
         {
+            if (!this.configuration.ContainsKey(configurationSettingName))
+            {
+                string configValue = CloudConfigurationManager.GetSetting(configurationSettingName);
+                bool isEmulated = Environment.CommandLine.Contains("iisexpress.exe") || 
+                    Environment.CommandLine.Contains("w3wp.exe") ||
+                    Environment.CommandLine.Contains("WebJob.vshost.exe");
 
-                if (!this.configuration.ContainsKey(configurationSettingName))
+                if (isEmulated && (configValue != null && configValue.StartsWith(ConfigToken, StringComparison.OrdinalIgnoreCase)))
                 {
-                    string configValue = CloudConfigurationManager.GetSetting(configurationSettingName);
-                    bool isEmulated = Environment.CommandLine.Contains("iisexpress.exe") || 
-                        Environment.CommandLine.Contains("w3wp.exe") ||
-                        Environment.CommandLine.Contains("WebJob.vshost.exe");
-
-                    if (isEmulated && (configValue != null && configValue.StartsWith(ConfigToken, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        if (environment == null)
-                        {
-                            LoadEnvironmentConfig();
-                        }
-
-                        configValue = environment.GetSetting(
-                            configValue.Substring(configValue.IndexOf(ConfigToken, StringComparison.Ordinal) + ConfigToken.Length));
-                    }
-                    try
-                    {
-                        this.configuration.Add(configurationSettingName, configValue);
-                    }
-                    catch (ArgumentException)
-                    {
-                        // at this point, this key has already been added on a different
-                        // thread, so we're fine to continue
-                    }
+                //if (environment == null)
+                //{
+                //    LoadEnvironmentConfig();
+                //}
+                //configValue = environment.GetSetting(
+                //    configValue.Substring(configValue.IndexOf(ConfigToken, StringComparison.Ordinal) + ConfigToken.Length));
+                    configValue = System.Environment.GetEnvironmentVariable(configurationSettingName);
+                    Console.WriteLine(string.Format("env:{0}={1}", configurationSettingName, configValue));
                 }
+                try
+                {
+                    this.configuration.Add(configurationSettingName, configValue);
+                    Console.WriteLine(string.Format("config:{0}={1}", configurationSettingName, configValue));
+            }
+                catch (ArgumentException)
+                {
+                    // at this point, this key has already been added on a different
+                    // thread, so we're fine to continue
+                }
+            }
 
             return this.configuration[configurationSettingName];
         }
