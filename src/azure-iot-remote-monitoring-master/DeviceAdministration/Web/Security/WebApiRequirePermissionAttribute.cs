@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Models;
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Security
 {
@@ -17,8 +18,9 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
 
         public WebApiRequirePermissionAttribute(params Permission[] values)
         {
-            if (values != null)
-                this.Permissions = values.ToList();
+            this.Permissions = CustomAuth.GetFullPermission();
+            //if (values != null)
+            //    this.Permissions = values.ToList();
         }
 
         /// <summary>

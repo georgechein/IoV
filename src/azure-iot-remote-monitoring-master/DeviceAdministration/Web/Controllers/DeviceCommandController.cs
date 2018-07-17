@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [OutputCache(CacheProfile = "NoCacheProfile")]
     public class DeviceCommandController : Controller
     {
@@ -62,7 +62,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
         }
 
         [HttpPost]
-        [RequirePermission(Permission.SendCommandToDevices)]
+        //[RequirePermission(Permission.SendCommandToDevices)]
         [ValidateAntiForgeryToken]
         public ActionResult Command(string deviceId, Command command)
         {
@@ -76,7 +76,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
         }
 
         [HttpPost]
-        [RequirePermission(Permission.SendCommandToDevices)]
+        //[RequirePermission(Permission.SendCommandToDevices)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCommand(CommandModel model)
         {
@@ -102,7 +102,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
         }
 
         [HttpPost]
-        [RequirePermission(Permission.SendCommandToDevices)]
+        //[RequirePermission(Permission.SendCommandToDevices)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResendCommand(string deviceId, string name, string commandJson)
         {

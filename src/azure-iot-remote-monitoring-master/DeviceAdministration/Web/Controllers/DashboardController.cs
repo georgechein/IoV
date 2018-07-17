@@ -18,7 +18,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
     /// <summary>
     /// A Controller for Dashboard-related views.
     /// </summary>
-    [Authorize]
+    //[Authorize]
     [OutputCache(CacheProfile = "NoCacheProfile")]
     public class DashboardController : Controller
     {
@@ -57,9 +57,11 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
             _configProvider = configProvider;
         }
 
-        [RequirePermission(Permission.ViewTelemetry)]
+        //[RequirePermission(Permission.ViewTelemetry)]
         public async Task<ActionResult> Index()
         {
+            var name = User.Identity.Name;
+
             var model = new DashboardModel();
             var filters = new List<Infrastructure.Models.FilterInfo>
             {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Models;
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Security
 {
@@ -19,8 +20,9 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
 
         public RequirePermissionAttribute(params Permission[] values) 
         {
-            if (values != null)
-                this.Permissions = values.ToList();
+            this.Permissions = CustomAuth.GetFullPermission();
+            //if (values != null)
+            //    this.Permissions = values.ToList();
         }
 
         /// <summary>
@@ -30,11 +32,11 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.
         /// <returns>True if they have the permission, false otherwise (or if the permission doesn't exist)</returns>
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var isAuthorized = base.AuthorizeCore(httpContext);
-            if (!isAuthorized)
-            {
-                return false;
-            }
+            //var isAuthorized = base.AuthorizeCore(httpContext);
+            //if (!isAuthorized)
+            //{
+            //    return false;
+            //}
 
             return PermsChecker.HasPermission(this.Permissions);
         }

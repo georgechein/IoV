@@ -8,6 +8,7 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Models;
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web
 {
@@ -30,7 +31,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web
         protected void Application_BeginRequest(Object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = GetSelectedCulture();
-
+            this.Request.RequestContext.HttpContext.User = CustomAuth.GetFakeUser();
             if (Context.Request.IsSecureConnection)
             {
                 // HSTS blocks access to sites with invalid certs

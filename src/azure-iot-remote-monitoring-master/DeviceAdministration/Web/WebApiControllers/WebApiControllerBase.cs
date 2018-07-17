@@ -13,7 +13,7 @@ using Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Secu
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.WebApiControllers
 {
-    [Authorize]
+    //[Authorize]
     [WebApiCSRFValidation]
     public abstract class WebApiControllerBase : ApiController
     {

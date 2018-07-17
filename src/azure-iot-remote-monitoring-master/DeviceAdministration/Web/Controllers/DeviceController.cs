@@ -21,7 +21,7 @@ using Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Secu
 
 namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [OutputCache(CacheProfile = "NoCacheProfile")]
     public class DeviceController : Controller
     {

@@ -7,7 +7,7 @@
     /// <summary>
     /// A Controller for culture operations.
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class CultureController : Controller
     {
         [HttpGet]

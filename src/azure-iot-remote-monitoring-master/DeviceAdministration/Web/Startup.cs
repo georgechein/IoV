@@ -13,7 +13,7 @@ namespace Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web
             Startup.HttpConfiguration = new System.Web.Http.HttpConfiguration();
             ConfigurationProvider configProvider = new ConfigurationProvider();
 
-            ConfigureAuth(app, configProvider);
+            //ConfigureAuth(app, configProvider);
             ConfigureAutofac(app);
 
             // WebAPI call must come after Autofac
