@@ -1,53 +1,62 @@
 #取得專案原始碼
-#git clone https://github.com/georgechein/IoV.git
+git clone https://github.com/georgechein/IoV.git
 
 #切換至專案目錄下
-#cd .\IoV
+cd .\IoV
 
 #定義專案絕對路徑
-#$projectPath = "D:\source\NEW_EO10002"
+$projectPath = (Get-Item -Path ".\").FullName
+
+#切換至scripts目錄下
+cd scripts
 
 #產生建置原始碼環境
-docker-compose build builder
+docker-compose build IoVWebBuilder
 
 #產生建置結果目錄
-#New-Item -Path $projectPath'\publish' -Type Directory;
+New-Item -Path $projectPath'\scripts\publish' -Type Directory;
 
 #複製建置執行檔到publish目錄
-#Copy-Item -Path $projectPath\build.ps1 -Destination $projectPath\publish\build.ps1 -Force;
+Copy-Item -Path $projectPath\scripts\build.web.ps1 -Destination $projectPath\scripts\publish\build.web.ps1 -Force;
 
 #建置原始碼
-#docker run --rm -v $projectPath\src\AP\TSTI:C:\SOURCE -v $projectPath\publish:C:\BUILD tsti/authweb-builder:latest C:\BUILD\build.ps1 
-
-#產生資料庫映像檔
-#docker-compose build db
-#docker build -f .\Db.Dockerfile -t tsti/authweb-db:latest .
+docker run --rm -v $projectPath\src\azure-iot-remote-monitoring-master:C:\SOURCE -v $projectPath\scripts\publish:C:\BUILD tsti/iovwebbuilder:latest C:\BUILD\build.web.ps1 
 
 #準備好production環境的web.config for web and web service
-#Copy-Item -Path $projectPath\Web.Web.config -Destination $projectPath\publish\TstiAuthWeb\_PublishedWebsites\TstiAuthWeb\Web.config -Force
-#Copy-Item -Path $projectPath\WebService.Web.config -Destination $projectPath\publish\TstiAuthWebService\_PublishedWebsites\TstiAuthWebService\Web.config -Force
+Remove-Item -Path .\publish\Web\_PublishedWebsites\Web\Web.Debug.config -Force
+Remove-Item -Path .\publish\Web\_PublishedWebsites\Web\Web.Release.config -Force
 
 #產生網站映像檔
-#docker-compose build authweb
+docker-compose build IoVWeb
 #docker build -f .\Web.Dockerfile -t tsti/authweb-web:latest .
-
-#因映像檔已完成，刪除建置產生的檔案
-#Remove-Item -Path $projectPath'\publish' -Recurse;
-
-#產生 mdf& ldf 檔存放位置
-#New-Item -Path $projectPath'\data' -Type Directory;
-
-#執行資料庫映像檔
-#docker-compose up -d db
-#docker run --name TstiAuthWeb-DB --ip 172.21.192.11 -d -p 1433:1433 -v "D:/source/NEW_EO10002/data:C:/DATA" -e sa_password=P@ssw0rd -e ACCEPT_EULA=Y tsti/authweb-db:latest
-#docker exec TstiAuthWeb-DB SqlCmd -E -i C:\dbscript\1.CREATE_DB.sql
-#docker exec TstiAuthWeb-DB SqlCmd -E -i C:\dbscript\2.CREATE_TABLES.sql
-#docker exec TstiAuthWeb-DB SqlCmd -E -i C:\dbscript\3.CREATE_RECORDS.sql
-#docker exec TstiAuthWeb-DB Sqlcmd -E -S 172.21.192.11 -Q "ALTER LOGIN SA WITH PASSWORD='P@ssw0rd'"
 
 #產生 web log 檔存放位置
 #New-Item -Path $projectPath'\logs' -Type Directory;
 
 #執行網站映像檔
-#docker-compose up -d authweb
+docker-compose run -d --name IoVWeb --service-ports IoVWeb
 #docker run --name TstiAuthWeb-WEB --ip 172.21.192.10 -d -p 80:80 tsti/authweb-web:latest
+
+#因網站成功啟動，刪除建置所產生的檔案
+Remove-Item -Path $projectPath'\scripts\publish' -Recurse;
+
+#產生建置原始碼環境
+docker-compose build IoVGatewayBuilder
+
+#產生建置結果目錄
+New-Item -Path $projectPath'\scripts\publish' -Type Directory;
+
+#複製建置執行檔到publish目錄
+Copy-Item -Path $projectPath\scripts\build.gateway.ps1 -Destination $projectPath\scripts\publish\build.gateway.ps1 -Force;
+
+#建置原始碼
+docker run --rm -v $projectPath\src\InternetOfVehicles:C:\SOURCE -v $projectPath\scripts\publish:C:\BUILD tsti/iovgwbuilder:latest C:\BUILD\build.gateway.ps1 
+
+#產生gateway映像檔
+docker-compose build IoVGateway
+
+#執行gateway映像檔
+docker-compose run -d --name IoVGateway --service-ports IoVGateway
+
+#因gateway成功啟動，刪除建置所產生的檔案
+Remove-Item -Path $projectPath'\scripts\publish' -Recurse;
