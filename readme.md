@@ -13,3 +13,4 @@
 - 使用 WindowsContainerNetworking-LoggingAndCleanupAide.ps1 可以取得系統中 docker 與相關環境的資訊，其中 HNSRegistry.txt 就有環境中的 HNS 服務資訊。苦主的環境不知為何登錄檔設定變成 7.2，與實際檔案不符。
 - 轉為 .net core 版本，工程浩大，原專案參考了一個 DeviceManagement.Infrustructure.Connectivity 的 Nuget 套件，該套件無 .net core 版本。
 - 使用 AAD (Azure Active Directory)驗證時，登入的網址會受到 AAD 的設定影響，無法變更。解決方式只有不使用 AAD 。
+- Azure App Service 的設定，大多存於環境變數，故於 docker-compose.yml 與 .env 中，做了相關設定。有興趣者，可於原 Azure App Service 的 console 中驗證該環境的環境變數資訊。
